@@ -21,7 +21,6 @@ void affiche_menu(){
 
 int main(){
 
-
     int choix;
     int choix2;
 
@@ -39,8 +38,6 @@ int main(){
                  printf("entrer le montant : ");
                  scanf("%f",&compte[i].montant);
                  break;
-
-
         case 2 :
                  printf("entrer le nom : ");
                  scanf("%s",compte[i].nom);
@@ -60,7 +57,7 @@ int main(){
         }
 
  affiche_menu();
-     scanf("%d",&choix);
+     scanf("%d", &choix);
     }
 
 
