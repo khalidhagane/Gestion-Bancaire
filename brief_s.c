@@ -11,15 +11,13 @@ struct compte_bancaire{
 };
 struct compte_bancaire compte[1000];
 
-int recherche_cin()
+int recherche_cin(struct compte_bancaire bank[max], int size, char *rech)
 {
-    int i,index;
-    char cin[20];
-    printf("entrer le cin : ");
-    scanf("%s",cin);
+    int i;
+    int index = -1;
 
-    for (i=0; i<sizeof(1000); i++) {
-        if (strcmp(cin, compte[i].cin) == 0)
+    for (i=0; i<size; i++) {
+        if (strcmp(rech, bank[i].cin) == 0)
             index = i;
     }
     return index;
@@ -52,12 +50,13 @@ int main(){
     int choix;
     int choix2;
     int choix3;
+    int choix4;
     double montantEntree;
     int total = 0;
 
     int ind_cin;
 
-    //char rech_cin[12];
+    char rech_cin[12];
 
     affiche_menu();
     scanf("%d",&choix);
@@ -72,7 +71,7 @@ int main(){
 				if (i > max - 1)
 				{
 					i = 0;
-					printf("le stockage est saturÃ© les anciennes informations seront supprimÃ©es!");
+					printf("le stockage est saturé les anciennes informations seront supprimées!");
 				}
 
 				// total des comptes qui sont insere
@@ -89,7 +88,7 @@ int main(){
 				if (i > max - 1)
 				{
 					i = 0;
-					printf("le stockage est saturÃ© les anciennes informations seront supprimÃ©es!");
+					printf("le stockage est saturé les anciennes informations seront supprimées!");
 				}
 
 				total++;
@@ -109,7 +108,7 @@ int main(){
 				if (i > max - 1)
 				{
 					i = 0;
-					printf("le stockage est saturÃ© les anciennes informations seront supprimÃ©es!");
+					printf("le stockage est saturé les anciennes informations seront supprimées!");
 				}
 
 				total++;
@@ -128,12 +127,15 @@ int main(){
                     printf("Entrer 1 pour Retrait ou 2 pour Depot ou 3 pour retourner menu principale :");
                     scanf("%d", &choix3);
 
-                    while (choix3 == 1)
-				       {
+                    /*while (choix3 == 1)
+				       {*/
+				           if(choix3 == 1){
+                          printf("Entrer cin : ");
+                          scanf("%s", rech_cin);
 
-                          ind_cin = recherche_cin();
+                          ind_cin = recherche_cin(compte, total, rech_cin);
 
-                             if (ind_cin != 0){
+                             if (ind_cin == -1){
                                 printf("Le cin n'existe pas \n");
                               }
                              else
@@ -147,60 +149,58 @@ int main(){
                                     else{
                                             compte[ind_cin].montant -= montantEntree;
                                             printf("montant globale : %.2lf\n",compte[ind_cin].montant);
+                                            break;
                                         }
-
-                                }
-                                printf("Entrer 1 pour Retrait ou 2 pour Depot ou 3 pour retourner menu principale :");
-                             scanf("%d", &choix3);
-                        }
-
-                    break;
-
-
-				// Depot
-				/*else if (choix3 == 2)
-                  {
-                                ind_cin = recherche_cin();
-
-                                // cas erreur // non trouve
-                                if (ind_cin == -1)
-                                {
-                                    printf("Le cin n'existe pas \n");
-                                }
-
-                                // cas vrai // cin trouve
-                                else
-                                {
-                                    // montant a depose
-                                    printf("Entrer le montant :");
-                                    scanf("%f", &montantEntree);
-                                    compte[ind_cin].montant += montantEntree;
-                                    break;
-                                }
+                                 }
                             }
+                       // }
 
-                            else
-                            {
-                                printf("L'option n'existe pas \n");
-                                printf("Entrer 1 pour Retrait ou 2 pour Depot ou 3 pour annuler :");
-                                //
-                                scanf("%d", &choix3);
-                            }
-                            break;*/
+				else if(choix3 == 2){
+					printf("Entrer cin : ");
+					scanf("%s", rech_cin);
 
 
-                       // montant
+					// indice de compte
+					ind_cin = recherche_cin(compte, total, rech_cin);
+
+					// cas erreur // non trouve
+					if (ind_cin == -1)
+					{
+						printf("Le cin n'existe pas \n");
+					}
+
+					// cas vrai // cin trouve
+					else
+					{
+						// montant a depose
+						printf("Entrer le montant :");
+						scanf("%lf", &montantEntree);
+						compte[ind_cin].montant += montantEntree;
+						 printf("montant globale : %.2lf\n",compte[ind_cin].montant);
+						break;
+					}
+				}
+                 else{
+					printf("L'option n'existe pas \n");
+					printf("Entrer 1 pour Retrait ou 2 pour Depot ou 3 pour annuler :");
+					//
+					scanf("%d", &choix3);
+				}
+				break;
 
 
 
-                       // cas erreur // non trouve
+            case 4 : printf("1 pour ordre ascendant\n");
+                     printf("2 pour ordre descendant\n");
+                     printf("3 pour ordre ascendant et superieur a un chiffre\n");
+                     printf("4 pour ordre descendant et superieur a un chiffre\n");
+                     printf("5 pour rechercher avec cin\n");
 
-                     //  }
-                     // }
-                     // Depot
+				     scanf("%d", &choix4);
 
 
-       // case 4 : printf("");
+
+
        // case 5 : printf("");
        // case 6 : printf("");
        default :printf("L'option n'existe pas \n");
