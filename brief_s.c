@@ -9,9 +9,10 @@ struct compte_bancaire{
     char cin[20];
     double montant;
 };
+
 struct compte_bancaire compte[1000];
 
-int recherche_cin(struct compte_bancaire bank[max], int size, char *rech)
+int recherche_cin(struct compte_bancaire bank[1000], int size, char rech[12])
 {
     int i;
     int index = -1;
@@ -46,7 +47,9 @@ void affiche_menu(){
 }
 
 int main(){
-     int i=0;
+    int j=0;
+    int t=0;
+    int i=0;
     int choix;
     int choix2;
     int choix3;
@@ -54,9 +57,14 @@ int main(){
     double montantEntree;
     int total = 0;
 
+   struct compte_bancaire aux;
+
     int ind_cin;
 
     char rech_cin[12];
+
+
+
 
     affiche_menu();
     scanf("%d",&choix);
@@ -67,18 +75,16 @@ int main(){
                  inserer_compte(i);
 
                  i++;
-				// limite a ete depasse
-				if (i > max - 1)
-				{
-					i = 0;
-					printf("le stockage est saturé les anciennes informations seront supprimées!");
-				}
 
-				// total des comptes qui sont insere
-				// 100
-				total++; // 101
+				if (i > max - 1)
+                    {
+                        i = 0;
+                        printf("le stockage est saturé les anciennes informations seront supprimées!\n");
+                    }
+
+                 total++;
 				if (total > max)
-					total = max; // ex max = 100
+					total = max;
 
                  break;
         case 2 :
@@ -88,14 +94,14 @@ int main(){
 				if (i > max - 1)
 				{
 					i = 0;
-					printf("le stockage est saturé les anciennes informations seront supprimées!");
+					printf("le stockage est saturé les anciennes informations seront supprimées!\n");
 				}
 
 				total++;
 				if (total > max)
 					total = max;
 
-                 printf("entrer 1 pour saisir autre personne ou 2 pour retourner au menu principale :");
+                 printf("entrer 1 pour saisir autre personne ou 2 pour retourner menu principale :");
                  scanf("%d",&choix2);
 
                  while(choix2 != 2){
@@ -108,7 +114,7 @@ int main(){
 				if (i > max - 1)
 				{
 					i = 0;
-					printf("le stockage est saturé les anciennes informations seront supprimées!");
+					printf("le stockage est saturé les anciennes informations seront supprimées!\n");
 				}
 
 				total++;
@@ -127,13 +133,11 @@ int main(){
                     printf("Entrer 1 pour Retrait ou 2 pour Depot ou 3 pour retourner menu principale :");
                     scanf("%d", &choix3);
 
-                    /*while (choix3 == 1)
-				       {*/
 				           if(choix3 == 1){
                           printf("Entrer cin : ");
                           scanf("%s", rech_cin);
 
-                          ind_cin = recherche_cin(compte, total, rech_cin);
+                          ind_cin = recherche_cin(compte, total , rech_cin);
 
                              if (ind_cin == -1){
                                 printf("Le cin n'existe pas \n");
@@ -153,26 +157,20 @@ int main(){
                                         }
                                  }
                             }
-                       // }
 
 				else if(choix3 == 2){
 					printf("Entrer cin : ");
 					scanf("%s", rech_cin);
 
-
-					// indice de compte
 					ind_cin = recherche_cin(compte, total, rech_cin);
 
-					// cas erreur // non trouve
 					if (ind_cin == -1)
 					{
 						printf("Le cin n'existe pas \n");
 					}
 
-					// cas vrai // cin trouve
 					else
 					{
-						// montant a depose
 						printf("Entrer le montant :");
 						scanf("%lf", &montantEntree);
 						compte[ind_cin].montant += montantEntree;
@@ -183,7 +181,7 @@ int main(){
                  else{
 					printf("L'option n'existe pas \n");
 					printf("Entrer 1 pour Retrait ou 2 pour Depot ou 3 pour annuler :");
-					//
+
 					scanf("%d", &choix3);
 				}
 				break;
@@ -198,16 +196,56 @@ int main(){
 
 				     scanf("%d", &choix4);
 
+             if(choix4==1){
+                for(i=0;i<total;i++){
+                    for(j=i+1;j<total;j++){
+                        if(compte[i].montant> compte[j].montant){
+                                 aux=compte[i];
+                                 compte[i]=compte[j];
+                                 compte[j]=aux;
+                            }
+                    }
+                }
+                for(i=0;i<total;i++){
+                    printf("nom : %s\t",compte[i].nom);
+                    printf("prenom : %s\t",compte[i].prenom);
+                    printf("cin : %s\t",compte[i].cin);
+                    printf("montant : %.2lf\t",compte[i].montant);
+                    printf("\n");
+                    }
+             }
 
 
+            else if(choix4==2){
+
+                    for(i=0;i<total;i++){
+                        for(j=i+1;j<total;j++){
+                            if(compte[i].montant < compte[j].montant){
+                                     aux=compte[i];
+                                     compte[i]=compte[j];
+                                     compte[j]=aux;
+                                   }
+
+                                }
+
+                            }
+                        for(i=0;i<total;i++){
+                            printf("nom : %s\t",compte[i].nom);
+                            printf("prenom : %s\t",compte[i].prenom);
+                            printf("cin : %s\t",compte[i].cin);
+                            printf("montant : %.2lf\t",compte[i].montant);
+                            printf("\n");
+                            }
+             }
+            break;
 
        // case 5 : printf("");
-       // case 6 : printf("");
+
        default :printf("L'option n'existe pas \n");
                     break;
         }
 
- affiche_menu();
+     affiche_menu();
      scanf("%d", &choix);
     }
 
