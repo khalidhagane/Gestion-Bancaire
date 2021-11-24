@@ -308,6 +308,32 @@ int main(){
 
                   }
 
+
+                  else if (choix4 == 5)
+                     {
+					printf("Entrer cin : ");
+					scanf("%s", rech_cin);
+
+					ind_cin = recherche_cin(compte, total, rech_cin);
+
+					if (ind_cin == -1) {
+						printf("Le cin n'existe pas \n");
+					     }
+					      else {
+					            printf("nom : %s\t\n",compte[ind_cin].nom);
+                                printf("prenom : %s\t\n",compte[ind_cin].prenom);
+                                printf("cin : %s\t\n",compte[ind_cin].cin);
+                                printf("montant : %.2lf\t\n",compte[ind_cin].montant);
+                                printf("\n");
+
+					         }
+				      }
+
+				else
+				   {
+					printf("L'option n'existe pas \n");
+				  }
+
             break;
 
        // case 5 : printf("");
