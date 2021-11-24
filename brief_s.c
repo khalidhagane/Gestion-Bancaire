@@ -71,6 +71,7 @@ int main(){
 
     while(choix!=6){
        switch(choix){
+
         case 1 :
                  inserer_compte(i);
 
@@ -79,7 +80,7 @@ int main(){
 				if (i > max - 1)
                     {
                         i = 0;
-                        printf("le stockage est saturé les anciennes informations seront supprimées!\n");
+                        printf("le stockage est saturï¿½ les anciennes informations seront supprimï¿½es!\n");
                     }
 
                  total++;
@@ -87,6 +88,7 @@ int main(){
 					total = max;
 
                  break;
+
         case 2 :
                  inserer_compte(i);
 
@@ -94,7 +96,7 @@ int main(){
 				if (i > max - 1)
 				{
 					i = 0;
-					printf("le stockage est saturé les anciennes informations seront supprimées!\n");
+					printf("le stockage est saturï¿½ les anciennes informations seront supprimï¿½es!\n");
 				}
 
 				total++;
@@ -114,7 +116,7 @@ int main(){
 				if (i > max - 1)
 				{
 					i = 0;
-					printf("le stockage est saturé les anciennes informations seront supprimées!\n");
+					printf("le stockage est saturï¿½ les anciennes informations seront supprimï¿½es!\n");
 				}
 
 				total++;
@@ -129,6 +131,7 @@ int main(){
                            scanf("%d",&choix2);
                      }
                  break;
+
         case 3 :
                     printf("Entrer 1 pour Retrait ou 2 pour Depot ou 3 pour retourner menu principale :");
                     scanf("%d", &choix3);
@@ -220,7 +223,8 @@ int main(){
 
                     for(i=0;i<total;i++){
                         for(j=i+1;j<total;j++){
-                            if(compte[i].montant < compte[j].montant){
+                            if(compte[i].montant < compte[j].montant)
+                                   {
                                      aux=compte[i];
                                      compte[i]=compte[j];
                                      compte[j]=aux;
@@ -236,7 +240,74 @@ int main(){
                             printf("montant : %.2lf\t",compte[i].montant);
                             printf("\n");
                             }
-             }
+                }
+
+
+             else if(choix4==3){
+
+                for(i=0;i<total;i++){
+                        for(j=i+1;j<total;j++){
+                            if(compte[i].montant < compte[j].montant){
+                                     aux=compte[i];
+                                     compte[i]=compte[j];
+                                     compte[j]=aux;
+                                   }
+                                }
+                            }
+
+                            printf("entrer le montant : ");
+                            scanf("%lf",&montantEntree);
+
+                            for(i=0;i<total;i++){
+
+                            if(compte[i].montant<montantEntree){
+
+                                printf("nom : %s\t",compte[i].nom);
+                                printf("prenom : %s\t",compte[i].prenom);
+                                printf("cin : %s\t",compte[i].cin);
+                                printf("montant : %.2lf\t",compte[i].montant);
+                                printf("\n");
+
+                                }
+
+                            }
+
+                   }
+
+
+
+
+              else if(choix4==4){
+
+                  for(i=0;i<total;i++){
+                        for(j=i+1;j<total;j++){
+                            if(compte[i].montant > compte[j].montant){
+                                     aux=compte[i];
+                                     compte[i]=compte[j];
+                                     compte[j]=aux;
+                                   }
+                                }
+                            }
+
+                            printf("entrer le montant : ");
+                            scanf("%lf",&montantEntree);
+
+                            for(i=0;i<total;i++){
+
+                            if(compte[i].montant > montantEntree){
+
+                                printf("nom : %s\t",compte[i].nom);
+                                printf("prenom : %s\t",compte[i].prenom);
+                                printf("cin : %s\t",compte[i].cin);
+                                printf("montant : %.2lf\t",compte[i].montant);
+                                printf("\n");
+
+                               }
+
+                          }
+
+                  }
+
             break;
 
        // case 5 : printf("");
