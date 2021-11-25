@@ -54,6 +54,7 @@ int main(){
     int choix2;
     int choix3;
     int choix4;
+	
     double montantEntree;
     int total = 0;
 
